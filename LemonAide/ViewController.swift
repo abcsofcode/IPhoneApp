@@ -69,11 +69,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         firstNameLabel.textColor = UIColor.orangeColor()
         emailLabel.textColor = UIColor.orangeColor()
-        passwordLabel.textColor = UIColor.orangeColor()
-        
-        
+        passwordLabel.textColor = UIColor.orangeColor()        
         registerButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRegistrationStatus:", name: appDelegate.registrationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceivedMessage:", name: appDelegate.messageKey, object: nil)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -88,11 +90,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return false
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
 }
 

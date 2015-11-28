@@ -31,15 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
-      
+        let gcmConfig = GCMConfig.defaultConfig()
+        gcmConfig.receiverDelegate = self
+        GCMService.sharedInstance().startWithConfig(gcmConfig)
            
         return true
     }
+   
+    
     
     func onTokenRefresh()
     {
         // A rotation of the registration tokens is happening, so the app needs to request a new token.
-        
         print("The GCM registration token needs to be changed.")
         
         GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
@@ -48,19 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     func application( application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData )
     {
-            // [END receive_apns_token]
-            // [START get_gcm_reg_token]
             // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
             let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
             instanceIDConfig.delegate = self
+        
             // Start the GGLInstanceID shared instance with that config and request a registration
             // token to enable reception of notifications
             GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
-            registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
-                kGGLInstanceIDAPNSServerTypeSandboxOption:true]
-            GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID,
-                scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
-            // [END get_gcm_reg_token]
+            registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken, kGGLInstanceIDAPNSServerTypeSandboxOption:true]
+            GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }
     
     func registrationHandler(registrationToken: String!, error: NSError!)
@@ -70,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             self.registrationToken = registrationToken
             print("Registration Token: \(registrationToken)")
             
-            //self.subscribeToTopic()
+            self.subscribeToTopic()
             
             let userInfo = ["registrationToken": registrationToken]
             NSNotificationCenter.defaultCenter().postNotificationName(
@@ -79,11 +78,94 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         else
         {
             print("Registration to GCM failed with error: \(error.localizedDescription)")
-            let userInfo = ["error": error.localizedDescription]
-            NSNotificationCenter.defaultCenter().postNotificationName(
-                self.registrationKey, object: nil, userInfo: userInfo)
         }
     }
+    
+    func updateRegistrationStatus(notification: NSNotification)
+    {
+        if let info = notification.userInfo as? Dictionary<String,String>
+        {
+            if let error = info["error"]
+            {
+                print("Error registering!")
+                
+                showAlert("Error registering with GCM", message: error)
+            }
+            else if let _ = info["registrationToken"]
+            {
+                print("Registered!")
+                
+                let message = "Check the xcode debug console for the registration token that you " +
+                " can use with the demo server to send notifications to your device"
+                showAlert("Registration Successful!", message: message)
+            }
+        }
+        else
+        {
+            print("Software failure. Guru meditation.")
+        }
+    }
+    
+    func subscribeToTopic()
+    {
+        // If the app has a registration token and is connected to GCM, proceed to subscribe to the topic
+        if(registrationToken != nil && connectedToGCM)
+        {
+            GCMPubSub.sharedInstance().subscribeWithToken(self.registrationToken, topic: subscriptionTopic, options: nil, handler: {(NSError error) -> Void in
+                if (error != nil)
+                {
+                    // Treat the "already subscribed" error more gently
+                    if error.code == 3001
+                    {
+                        print("Already subscribed to \(self.subscriptionTopic)")
+                    }
+                    else
+                    {
+                        print("Subscription failed: \(error.localizedDescription)");
+                    }
+                }
+                else
+                {
+                    self.subscribedToTopic = true;
+                    
+                    print("Subscribed to \(self.subscriptionTopic)");
+                }
+            })
+        }
+    }
+    
+    func showReceivedMessage(notification: NSNotification)
+    {
+        if let info = notification.userInfo as? Dictionary<String,AnyObject>
+        {
+            if let aps = info["aps"] as? Dictionary<String, String>
+            {
+                showAlert("Message received", message: aps["alert"]!)
+            }
+        }
+        else
+        {
+            print("Software failure. Guru meditation.")
+        }
+    }
+    
+    func showAlert(title:String, message:String) {
+        
+            let alert = UIAlertController(title: title,
+                message: message, preferredStyle: .Alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .Destructive, handler: nil)
+        
+            alert.addAction(dismissAction)
+        
+            //self.presentViewController(alert, animated: true, completion: nil)
+       
+    }
+    
+        
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     
 
     func applicationWillResignActive(application: UIApplication) {
