@@ -9,15 +9,82 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+
+class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
 
     var window: UIWindow?
-
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+    
+    var connectedToGCM = false
+    var subscribedToTopic = false
+    var gcmSenderID: String?
+    var registrationToken: String?
+    var registrationOptions = [String: AnyObject]()
+    
+    let registrationKey = "onRegistrationCompleted"
+    let messageKey = "onMessageReceived"
+    let subscriptionTopic = "/topics/global"
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+        
+      
+           
         return true
     }
+    
+    func onTokenRefresh()
+    {
+        // A rotation of the registration tokens is happening, so the app needs to request a new token.
+        
+        print("The GCM registration token needs to be changed.")
+        
+        GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+    }
+    
+    
+    func application( application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData )
+    {
+            // [END receive_apns_token]
+            // [START get_gcm_reg_token]
+            // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
+            let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
+            instanceIDConfig.delegate = self
+            // Start the GGLInstanceID shared instance with that config and request a registration
+            // token to enable reception of notifications
+            GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
+            registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
+                kGGLInstanceIDAPNSServerTypeSandboxOption:true]
+            GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID,
+                scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+            // [END get_gcm_reg_token]
+    }
+    
+    func registrationHandler(registrationToken: String!, error: NSError!)
+    {
+        if (registrationToken != nil)
+        {
+            self.registrationToken = registrationToken
+            print("Registration Token: \(registrationToken)")
+            
+            //self.subscribeToTopic()
+            
+            let userInfo = ["registrationToken": registrationToken]
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                self.registrationKey, object: nil, userInfo: userInfo)
+        }
+        else
+        {
+            print("Registration to GCM failed with error: \(error.localizedDescription)")
+            let userInfo = ["error": error.localizedDescription]
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                self.registrationKey, object: nil, userInfo: userInfo)
+        }
+    }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

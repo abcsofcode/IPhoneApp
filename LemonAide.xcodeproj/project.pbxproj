@@ -51,6 +51,7 @@
 		BBF00ECF1C0A021A007D130A /* LemonAideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LemonAideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF00ED31C0A021A007D130A /* LemonAideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LemonAideUITests.swift; sourceTree = "<group>"; };
 		BBF00ED51C0A021A007D130A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBF00F201C0A2C8D007D130A /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +128,7 @@
 				BBF00EBA1C0A021A007D130A /* Assets.xcassets */,
 				BBF00EBC1C0A021A007D130A /* LaunchScreen.storyboard */,
 				BBF00EBF1C0A021A007D130A /* Info.plist */,
+				BBF00F211C0A357B007D130A /* Supporting Files */,
 			);
 			path = LemonAide;
 			sourceTree = "<group>";
@@ -147,6 +149,14 @@
 				BBF00ED51C0A021A007D130A /* Info.plist */,
 			);
 			path = LemonAideUITests;
+			sourceTree = "<group>";
+		};
+		BBF00F211C0A357B007D130A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BBF00F201C0A2C8D007D130A /* BridgingHeader.h */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,6 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bobwhite.LemonAide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = LemonAide/BridgingHeader.h;
 			};
 			name = Debug;
 		};
@@ -500,6 +511,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bobwhite.LemonAide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = LemonAide/BridgingHeader.h;
 			};
 			name = Release;
 		};
