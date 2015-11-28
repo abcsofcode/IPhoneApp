@@ -14,6 +14,7 @@
 		BBF00EBE1C0A021A007D130A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF00EBC1C0A021A007D130A /* LaunchScreen.storyboard */; };
 		BBF00EC91C0A021A007D130A /* LemonAideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF00EC81C0A021A007D130A /* LemonAideTests.swift */; };
 		BBF00ED41C0A021A007D130A /* LemonAideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF00ED31C0A021A007D130A /* LemonAideUITests.swift */; };
+		BD7C4DD4D8C6648F5DAF2BC8 /* libPods-LemonAide.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7494C5474C09ADBD5EF0B856 /* libPods-LemonAide.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3AD7E686C3D63494E2AA105A /* Pods-LemonAide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LemonAide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LemonAide/Pods-LemonAide.debug.xcconfig"; sourceTree = "<group>"; };
+		6B3C851007B6AC2B5CDAF060 /* Pods-LemonAide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LemonAide.release.xcconfig"; path = "Pods/Target Support Files/Pods-LemonAide/Pods-LemonAide.release.xcconfig"; sourceTree = "<group>"; };
+		7494C5474C09ADBD5EF0B856 /* libPods-LemonAide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LemonAide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF00EB01C0A021A007D130A /* LemonAide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LemonAide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF00EB31C0A021A007D130A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBF00EB51C0A021A007D130A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD7C4DD4D8C6648F5DAF2BC8 /* libPods-LemonAide.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +79,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0039B5E882114DB03B27FCBD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7494C5474C09ADBD5EF0B856 /* libPods-LemonAide.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E459017DE1DF0CE15898268 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3AD7E686C3D63494E2AA105A /* Pods-LemonAide.debug.xcconfig */,
+				6B3C851007B6AC2B5CDAF060 /* Pods-LemonAide.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BBF00EA71C0A021A007D130A = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +103,8 @@
 				BBF00EC71C0A021A007D130A /* LemonAideTests */,
 				BBF00ED21C0A021A007D130A /* LemonAideUITests */,
 				BBF00EB11C0A021A007D130A /* Products */,
+				5E459017DE1DF0CE15898268 /* Pods */,
+				0039B5E882114DB03B27FCBD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBF00ED81C0A021A007D130A /* Build configuration list for PBXNativeTarget "LemonAide" */;
 			buildPhases = (
+				78BC455A489D1505FC405090 /* Check Pods Manifest.lock */,
 				BBF00EAC1C0A021A007D130A /* Sources */,
 				BBF00EAD1C0A021A007D130A /* Frameworks */,
 				BBF00EAE1C0A021A007D130A /* Resources */,
+				F7E2735F5DF3DC0C13DF3F17 /* Embed Pods Frameworks */,
+				0018DBBC6DE28F250030A6CE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +220,7 @@
 				TargetAttributes = {
 					BBF00EAF1C0A021A007D130A = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = YX55VBVSSS;
 					};
 					BBF00EC31C0A021A007D130A = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -250,6 +278,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0018DBBC6DE28F250030A6CE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LemonAide/Pods-LemonAide-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78BC455A489D1505FC405090 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F7E2735F5DF3DC0C13DF3F17 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LemonAide/Pods-LemonAide-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BBF00EAC1C0A021A007D130A /* Sources */ = {
@@ -397,23 +473,33 @@
 		};
 		BBF00ED91C0A021A007D130A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AD7E686C3D63494E2AA105A /* Pods-LemonAide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LemonAide/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bobwhite.LemonAide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		BBF00EDA1C0A021A007D130A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B3C851007B6AC2B5CDAF060 /* Pods-LemonAide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LemonAide/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bobwhite.LemonAide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -484,6 +570,7 @@
 				BBF00EDA1C0A021A007D130A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBF00EDB1C0A021A007D130A /* Build configuration list for PBXNativeTarget "LemonAideTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +579,7 @@
 				BBF00EDD1C0A021A007D130A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBF00EDE1C0A021A007D130A /* Build configuration list for PBXNativeTarget "LemonAideUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +588,7 @@
 				BBF00EE01C0A021A007D130A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
