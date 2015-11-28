@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -27,14 +27,16 @@ class ViewController: UIViewController {
         let pWord = password.text
         
         
-        let url = NSURL(string: "http://www.myserver.com/test.php");
+        
+        let url = NSURL(string: "http://hackathon.bobwhite.ca/android/insertuser.php");
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST";
         
-        let postString = "firstName=TestName1&lastName=TestName2";
+        let postString = "nameId=\(fName!)&emailId=\(eMail!)&passwordId=\(pWord!)";
+        
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding);
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        //request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        //request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         let session = NSURLSession.sharedSession();
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
@@ -50,7 +52,7 @@ class ViewController: UIViewController {
         
         
         // URL to send registration information
-        let APP_SERVER_URL = "http://hackathon.bobwhite.ca/android/insertuser.php";
+        //let APP_SERVER_URL = "http://hackathon.bobwhite.ca/android/insertuser.php";
         
         
         //let APP_SERVER_URL = "http://hackathon.bobwhite.ca/GCM/gcm.php?shareRegId=true";
@@ -61,6 +63,10 @@ class ViewController: UIViewController {
     {
         super.viewDidLoad()
         
+        self.firstName.delegate = self
+        self.email.delegate = self
+        self.password.delegate = self
+        
         firstNameLabel.textColor = UIColor.orangeColor()
         emailLabel.textColor = UIColor.orangeColor()
         passwordLabel.textColor = UIColor.orangeColor()
@@ -68,6 +74,18 @@ class ViewController: UIViewController {
         
         registerButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
         
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        view.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        self.view.endEditing(true)
+        return false
     }
 
     override func didReceiveMemoryWarning() {
