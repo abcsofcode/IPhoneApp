@@ -76,6 +76,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRegistrationStatus:", name: appDelegate.registrationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceivedMessage:", name: appDelegate.messageKey, object: nil)
+    
+        print("viewDidLoad")
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)

@@ -34,7 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         let gcmConfig = GCMConfig.defaultConfig()
         gcmConfig.receiverDelegate = self
         GCMService.sharedInstance().startWithConfig(gcmConfig)
-           
+        
+        
+        print("didFinishLaunchingWithOptions")
+        
         return true
     }
    
@@ -44,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     {
         // A rotation of the registration tokens is happening, so the app needs to request a new token.
         print("The GCM registration token needs to be changed.")
-        
+               
         GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }
     
