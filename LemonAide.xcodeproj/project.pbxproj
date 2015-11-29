@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB7241EE1C0B358300F71868 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7241ED1C0B358300F71868 /* ProfileViewController.swift */; };
+		BB7241F01C0B4A5300F71868 /* AddVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7241EF1C0B4A5300F71868 /* AddVehicleViewController.swift */; };
 		BBF00EB41C0A021A007D130A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF00EB31C0A021A007D130A /* AppDelegate.swift */; };
 		BBF00EB61C0A021A007D130A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF00EB51C0A021A007D130A /* ViewController.swift */; };
 		BBF00EB91C0A021A007D130A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF00EB71C0A021A007D130A /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		6B3C851007B6AC2B5CDAF060 /* Pods-LemonAide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LemonAide.release.xcconfig"; path = "Pods/Target Support Files/Pods-LemonAide/Pods-LemonAide.release.xcconfig"; sourceTree = "<group>"; };
 		7494C5474C09ADBD5EF0B856 /* libPods-LemonAide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LemonAide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB7241ED1C0B358300F71868 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BB7241EF1C0B4A5300F71868 /* AddVehicleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVehicleViewController.swift; sourceTree = "<group>"; };
 		BBF00EB01C0A021A007D130A /* LemonAide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LemonAide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBF00EB31C0A021A007D130A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBF00EB51C0A021A007D130A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -128,13 +130,14 @@
 			children = (
 				BBF00F281C0A5F25007D130A /* GoogleService-Info.plist */,
 				BBF00EB31C0A021A007D130A /* AppDelegate.swift */,
+				BB7241EF1C0B4A5300F71868 /* AddVehicleViewController.swift */,
+				BB7241ED1C0B358300F71868 /* ProfileViewController.swift */,
 				BBF00EB51C0A021A007D130A /* ViewController.swift */,
 				BBF00EB71C0A021A007D130A /* Main.storyboard */,
 				BBF00EBA1C0A021A007D130A /* Assets.xcassets */,
 				BBF00EBC1C0A021A007D130A /* LaunchScreen.storyboard */,
 				BBF00EBF1C0A021A007D130A /* Info.plist */,
 				BBF00F211C0A357B007D130A /* Supporting Files */,
-				BB7241ED1C0B358300F71868 /* ProfileViewController.swift */,
 			);
 			path = LemonAide;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB7241EE1C0B358300F71868 /* ProfileViewController.swift in Sources */,
+				BB7241F01C0B4A5300F71868 /* AddVehicleViewController.swift in Sources */,
 				BBF00EB61C0A021A007D130A /* ViewController.swift in Sources */,
 				BBF00EB41C0A021A007D130A /* AppDelegate.swift in Sources */,
 			);
