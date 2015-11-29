@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID
+        
         let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         
         application.registerUserNotificationSettings(settings)
@@ -35,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         gcmConfig.receiverDelegate = self
         GCMService.sharedInstance().startWithConfig(gcmConfig)
         
-        
         print("didFinishLaunchingWithOptions")
         
         return true
@@ -43,11 +47,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
    
     
     
+    
+    func application( application: UIApplication,
+        didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+            print("Notification received: \(userInfo)")
+            // This works only if the app started the GCM service
+            GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+            // Handle the received message
+            // [START_EXCLUDE]
+            NSNotificationCenter.defaultCenter().postNotificationName(messageKey, object: nil,
+                userInfo: userInfo)
+            // [END_EXCLUDE]
+    }
+    
+    func application( application: UIApplication,
+        didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+        fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
+            print("Notification received: \(userInfo)")
+            // This works only if the app started the GCM service
+            GCMService.sharedInstance().appDidReceiveMessage(userInfo);
+            // Handle the received message
+            // Invoke the completion handler passing the appropriate UIBackgroundFetchResult value
+            // [START_EXCLUDE]
+            NSNotificationCenter.defaultCenter().postNotificationName(messageKey, object: nil,
+                userInfo: userInfo)
+            handler(UIBackgroundFetchResult.NoData);
+            // [END_EXCLUDE]
+    }
+
+    
+    
+    
     func onTokenRefresh()
     {
         // A rotation of the registration tokens is happening, so the app needs to request a new token.
         print("The GCM registration token needs to be changed.")
-               
+        
         GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }
     
@@ -72,11 +107,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             self.registrationToken = registrationToken
             print("Registration Token: \(registrationToken)")
             
-            self.subscribeToTopic()
+            registrationTokenString = registrationToken
             
-            let userInfo = ["registrationToken": registrationToken]
-            NSNotificationCenter.defaultCenter().postNotificationName(
-                self.registrationKey, object: nil, userInfo: userInfo)
+            //self.subscribeToTopic()
+            
+            //let userInfo = ["registrationToken": registrationToken]
+            //NSNotificationCenter.defaultCenter().postNotificationName(self.registrationKey, object: nil, userInfo: userInfo)
         }
         else
         {

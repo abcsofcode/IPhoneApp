@@ -6,6 +6,8 @@
 //  Copyright © 2015 Bob White. All rights reserved.
 //
 
+var registrationTokenString: String?
+
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
@@ -32,7 +34,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let request = NSMutableURLRequest(URL:url!)
         request.HTTPMethod = "POST";
         
-        let postString = "nameId=\(fName!)&emailId=\(eMail!)&passwordId=\(pWord!)";
+        let postString = "nameId=\(fName!)&emailId=\(eMail!)&passwordId=\(pWord!)&regId=\(registrationTokenString!)";
         
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding);
         //request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -72,10 +74,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passwordLabel.textColor = UIColor.orangeColor()        
         registerButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        //let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRegistrationStatus:", name: appDelegate.registrationKey, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceivedMessage:", name: appDelegate.messageKey, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRegistrationStatus:", name: appDelegate.registrationKey, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceivedMessage:", name: appDelegate.messageKey, object: nil)
     
         print("viewDidLoad")
     }
