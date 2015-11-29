@@ -90,9 +90,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         registerButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
         
         // TODO - push notification code
-        //let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRegistrationStatus:", name: appDelegate.registrationKey, object: nil)
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceivedMessage:", name: appDelegate.messageKey, object: nil)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateRegistrationStatus:", name: appDelegate.registrationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showReceivedMessage:", name: appDelegate.messageKey, object: nil)
     }
     
     // Touching outside textfield dismisses keyboard

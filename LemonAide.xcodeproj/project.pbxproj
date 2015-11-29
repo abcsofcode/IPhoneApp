@@ -243,6 +243,14 @@
 					BBF00EAF1C0A021A007D130A = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = YX55VBVSSS;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					BBF00EC31C0A021A007D130A = {
 						CreatedOnToolsVersion = 7.1.1;

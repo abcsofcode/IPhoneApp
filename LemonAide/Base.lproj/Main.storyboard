@@ -179,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-87" y="288"/>
+            <point key="canvasLocation" x="-143" y="288"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Myc-ny-fKz">
@@ -421,13 +421,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BDE-bd-GmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1384" y="288"/>
+            <point key="canvasLocation" x="1540" y="-484"/>
         </scene>
     </scenes>
     <resources>
         <image name="logo" width="170" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2yb-7l-jep"/>
+        <segue reference="xiC-lX-ssY"/>
     </inferredMetricsTieBreakers>
 </document>
