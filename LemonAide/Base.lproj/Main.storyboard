@@ -325,7 +325,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="ADD THIS VEHICLE"/>
                                 <connections>
+                                    <action selector="addButtonAction:" destination="b1f-JQ-eqJ" eventType="touchUpInside" id="RYw-qf-hQ7"/>
                                     <action selector="registerButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sry-2c-hl5"/>
+                                    <segue destination="hDd-Uh-GSk" kind="showDetail" id="2yb-7l-jep"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fn3-bb-7aU">
@@ -348,6 +350,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="ORh-f5-Hqa" id="Gsw-wc-XQw"/>
                         <outlet property="makeLabel" destination="1Ld-2N-LM3" id="M5H-zn-tqw"/>
                         <outlet property="makeTextbox" destination="Fn3-bb-7aU" id="Abm-D0-yLm"/>
                         <outlet property="modelLabel" destination="Qjm-n4-o69" id="xQa-5p-Ti4"/>
@@ -358,10 +361,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BDE-bd-GmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391" y="288"/>
+            <point key="canvasLocation" x="1384" y="288"/>
         </scene>
     </scenes>
     <resources>
         <image name="logo" width="170" height="150"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="2yb-7l-jep"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -8,7 +8,11 @@
 
 // Declare global variables & constants
 var registrationTokenString: String?
-let URL = NSURL(string: "http://hackathon.bobwhite.ca/android/insertuser.php");
+var storedVehicleCount = 0
+
+
+let URL_USER = NSURL(string: "http://hackathon.bobwhite.ca/android/insertuser.php");
+let URL_VEHICLE = NSURL(string: "http://hackathon.bobwhite.ca/android/insertcar.php");
 
 import UIKit
 
@@ -32,7 +36,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let pWord = password.text
         
         // Send user data to remote server
-        let request = NSMutableURLRequest(URL:URL!)
+        let request = NSMutableURLRequest(URL:URL_USER!)
         request.HTTPMethod = "POST";
         
         let postString = "nameId=\(fName!)&emailId=\(eMail!)&passwordId=\(pWord!)&regId=\(registrationTokenString!)";
@@ -43,7 +47,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
             
             let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
-            print("Data: \(urlContent)");
+            
+            NSUserDefaults.standardUserDefaults().setObject(urlContent, forKey: "userID")
         });
         
         task.resume();
@@ -73,7 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     {
         super.viewDidLoad()
         
-        // Ste delegates to self
+        // Set delegates to self
         self.firstName.delegate = self
         self.email.delegate = self
         self.password.delegate = self
@@ -94,6 +99,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         view.endEditing(true)
+        
         super.touchesBegan(touches, withEvent: event)
     }
     

@@ -40,13 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         gcmConfig.receiverDelegate = self
         GCMService.sharedInstance().startWithConfig(gcmConfig)
         
-        print("didFinishLaunchingWithOptions")
-        
         return true
-    }
-   
-    
-    
+    }    
     
     func application( application: UIApplication,
         didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
