@@ -35,9 +35,7 @@ class AddVehicleViewController: UIViewController, UITextFieldDelegate {
             let session = NSURLSession.sharedSession();
             let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
                 
-                let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
-                
-                NSUserDefaults.standardUserDefaults().setObject(urlContent, forKey: "userID")
+                _ = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
             });
             
             task.resume();
@@ -45,7 +43,7 @@ class AddVehicleViewController: UIViewController, UITextFieldDelegate {
             // Save vehicle on local device
             storedVehicleCount = NSUserDefaults.standardUserDefaults().integerForKey("vehiclecount") + 1
             
-            NSUserDefaults.standardUserDefaults().setObject(userID, forKey: "userID\(storedVehicleCount)")
+            NSUserDefaults.standardUserDefaults().setObject(registrationTokenString, forKey: "pushID")
             NSUserDefaults.standardUserDefaults().setObject(makeTextbox.text!, forKey: "make\(storedVehicleCount)")
             NSUserDefaults.standardUserDefaults().setObject(modelTextbox.text!, forKey: "model\(storedVehicleCount)")
             NSUserDefaults.standardUserDefaults().setObject(yearTextbox.text!, forKey: "year\(storedVehicleCount)")
@@ -53,6 +51,7 @@ class AddVehicleViewController: UIViewController, UITextFieldDelegate {
             
             NSUserDefaults.standardUserDefaults().synchronize()
             
+            print("count: \(storedVehicleCount)")
         }
     }
     
@@ -64,6 +63,9 @@ class AddVehicleViewController: UIViewController, UITextFieldDelegate {
         self.makeTextbox.delegate = self
         self.modelTextbox.delegate = self
         self.yearTextbox.delegate = self
+        
+        // Set button text color
+        addButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
     }
 
     override func didReceiveMemoryWarning() {

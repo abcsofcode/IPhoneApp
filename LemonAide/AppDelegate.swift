@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func onTokenRefresh()
     {
         // A rotation of the registration tokens is happening, so the app needs to request a new token.
-        print("The GCM registration token needs to be changed.")
+        //print("The GCM registration token needs to be changed.")
         
         GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         if (registrationToken != nil)
         {
             self.registrationToken = registrationToken
-            print("Registration Token: \(registrationToken)")
+            //print("Registration Token: \(registrationToken)")
             
             registrationTokenString = registrationToken
             

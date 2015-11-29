@@ -9,7 +9,7 @@
 // Declare global variables & constants
 var registrationTokenString: String?
 var storedVehicleCount = 0
-
+var myID = ""
 
 let URL_USER = NSURL(string: "http://hackathon.bobwhite.ca/android/insertuser.php");
 let URL_VEHICLE = NSURL(string: "http://hackathon.bobwhite.ca/android/insertcar.php");
